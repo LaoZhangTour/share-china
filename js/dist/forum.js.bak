@@ -1,0 +1,70 @@
+// 自动注入 FontAwesome 6 Brands CDN
+if (!document.getElementById('fa-brands-cdn')) {
+    const link = document.createElement('link');
+    link.id = 'fa-brands-cdn';
+    link.rel = 'stylesheet';
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+    document.head.appendChild(link);
+}
+
+flarum.core.compat.extend;
+var extend = flarum.core.compat.extend;
+var app = flarum.core.compat.app;
+var Component = flarum.core.compat.Component;
+var DiscussionPage = flarum.core.compat.DiscussionPage;
+
+// ShareButtons 组件
+class ShareButtons extends Component {
+    oninit(vnode) {
+        super.oninit(vnode);
+        this.discussion = vnode.attrs.discussion;
+    }
+
+    view() {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(this.discussion.title());
+
+        return m('div', { className: 'ShareChina-buttons' },
+            m('h4', null, app.translator.trans('fof-share-china.forum.share_title')),
+            m('div', { className: 'ShareChina-list' },
+                m('a', {
+                    href: `https://service.weibo.com/share/share.php?url=${url}&title=${title}`,
+                    target: '_blank', rel: 'noopener noreferrer',
+                    className: 'ShareChina-btn weibo', title: '微博'
+                }, m('i', { className: 'fab fa-weibo' })),
+                m('a', {
+                    href: `https://connect.qq.com/widget/shareqq/index.html?url=${url}&title=${title}`,
+                    target: '_blank', rel: 'noopener noreferrer',
+                    className: 'ShareChina-btn qq', title: 'QQ'
+                }, m('i', { className: 'fab fa-qq' })),
+                m('a', {
+                    href: `https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${url}&title=${title}`,
+                    target: '_blank', rel: 'noopener noreferrer',
+                    className: 'ShareChina-btn qzone', title: 'QQ空间'
+                }, m('i', { className: 'fas fa-star' })),
+                m('button', {
+                    className: 'ShareChina-btn wechat',
+                    onclick: () => alert('请使用手机微信扫描二维码分享'),
+                    title: '微信'
+                }, m('i', { className: 'fab fa-weixin' }))
+            )
+        );
+    }
+}
+
+// 将组件正确挂载到讨论页主内容流的底部（而非侧边栏）
+extend(DiscussionPage.prototype, 'sidebarItems', function(items) {
+    // 移除可能被错误添加到侧边栏的旧逻辑
+    items.remove('share-china');
+});
+
+extend(DiscussionPage.prototype, 'content', function(vdom) {
+    if (this.discussion) {
+        // 确保 content 是数组
+        if (!Array.isArray(vdom)) vdom = [vdom];
+        // 在讨论页主内容末尾追加分享按钮
+        vdom.push(
+            m(ShareButtons, { discussion: this.discussion })
+        );
+    }
+});

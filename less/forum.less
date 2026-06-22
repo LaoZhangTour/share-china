@@ -1,0 +1,50 @@
+.ShareChina-buttons {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+
+    h4 {
+        margin: 0 0 10px;
+        font-size: 14px;
+        color: #666;
+    }
+}
+
+.ShareChina-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.ShareChina-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: #fff !important;
+    font-size: 18px;
+    text-decoration: none;
+    transition: transform 0.2s, opacity 0.2s;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+        opacity: 0.9;
+    }
+
+    &.weibo { background: #e6162d; }
+    &.qq { background: #12b7f5; }
+    &.qzone { background: #ffc82c; }
+    &.wechat { background: #07c160; }
+}
+
+/* 适配讨论页底部布局 */
+.DiscussionPage .ShareChina-buttons {
+    margin-top: 30px;
+    width: 100%;
+    box-sizing: border-box;
+}
