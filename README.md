@@ -6,7 +6,7 @@
 
 一款极简的 Flarum 微信分享插件，为帖子生成专属微信画布分享卡片，让社区内容在微信生态中获得更优雅的传播体验。
 
-> 🔗 **演示站点**：[https://www.xiabibi.top](https://www.xiabibi.top)
+> 🔗 **演示站点**：~~[https://www.xiabibi.top](https://www.xiabibi.top)~~
 
 ## ✨ 功能特性
 
@@ -44,4 +44,4 @@ MIT License © 2024 xiabibi
 
 ## 🤝 反馈与交流
 
-欢迎提交 Issue 和 Pull Request！也欢迎访问 [https://www.xiabibi.top](https://www.xiabibi.top) 交流使用体验。
+欢迎提交 Issue 和 Pull Request！也欢迎访问[https://www.xiabibi.top](https://www.xiabibi.top)交流使用体验。
